@@ -99,12 +99,12 @@
             </div>
 
             <div class="map">
-                <img src="/assets/img/screenshot 2024-09-04 131211.png" alt="Map" class="image">
+                <img src="../assets/img/screenshot 2024-09-04 131211.png" alt="Map" class="image">
             </div>
         </div>
 
         <div class="image">
-            <img src="/assets/img/gebouw.png" alt="Cinema" class="image">
+            <img src="../assets/img/gebouw.png" alt="Cinema" class="image">
         </div>
     </div>
 </body>
