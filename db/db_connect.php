@@ -4,11 +4,11 @@ session_start();
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
-$dbname = ""; // vul dit in
+$dbname = "films"; // vul dit in
 
 try {
     $con = new PDO(
-        "mysql:host=$dbhost;dbname=..",
+        "mysql:host=$dbhost;dbname=films",
         $dbuser, $dbpass);
 
   echo "Connected succesfully";
