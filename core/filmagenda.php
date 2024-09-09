@@ -15,7 +15,7 @@
     .container {
       width: 90%;
       margin: 0 auto;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, );
       padding: 20px;
     }
     .agenda-header {
