@@ -1,8 +1,3 @@
-<?php include "header.php";?>
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +17,7 @@
       background-color: rgba(255, 255, 255, 0.9);
       padding: 20px;
     }
-    .header {
+    .agenda-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -79,7 +74,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="header">
+    <div class="agenda-header">
       <h1>FILM AGENDA</h1>
       <div>
         <select>
@@ -155,4 +150,3 @@
   </div>
 </body>
 </html>
-<?php include "footer.php";?>
