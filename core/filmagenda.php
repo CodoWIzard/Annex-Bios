@@ -1,12 +1,13 @@
+<?php include "header.php";?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Film Agenda</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
-    .body {
+    body {
       font-family: Arial, sans-serif;
-      background: url('https://placehold.co/1920x1080') no-repeat center center fixed;
+      background: url('./assets/img/header_afbeelding.jpg'); 
       background-size: cover;
       margin: 0;
       padding: 0;
@@ -14,7 +15,7 @@
     .container {
       width: 90%;
       margin: 0 auto;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, );
       padding: 20px;
     }
     .agenda-header {
@@ -25,10 +26,10 @@
       color: white;
       padding: 10px 20px;
     }
-    .header h1 {
+    .agenda-header h1 {
       margin: 0;
     }
-    .header select {
+    .agenda-header select {
       padding: 5px;
       margin-left: 10px;
     }
@@ -93,38 +94,10 @@
     </div>
     <div class="movie-grid">
       <?php
-      
+        include "moviearray.php";
 
-      $movies = array(
-        array(
-          'title' => 'Jurassic World: Fallen Kingdom',
-          'image' => '/assets/img/Jurassic-World_-Fallen-Kingdom.jpg',
-          'release' => '06-06-2018',
-          'rating' => 4.5
-        ),
-        array(
-          'title' => 'Deadpool 2',
-          'image' => '/assets/img/deadpool.jpg',
-          'release' => '17-05-2018',
-          'rating' => 4.5
-        ),
-        array(
-          'title' => 'Solo: A Star Wars Story',
-          'image' => '/assets/img/solo.jpeg',
-          'release' => '23-05-2018',
-          'rating' => 4.5
-        ),
-        array(
-          'title' => 'Pieter Konijn',
-          'image' => '/assets/img/pieter konijn.jpg',
-          'release' => '28-03-2018',
-          'rating' => 4.5
-        ),
-        
-      );
-
-      foreach ($movies as $movie) {
-        ?>
+        foreach ($movies as $movie) {
+      ?>
         <div class="movie-card">
           <img alt="<?php echo $movie['title']; ?>" height="300" src="<?php echo $movie['image']; ?>" width="200"/>
           <div class="details">
@@ -132,21 +105,23 @@
             <p>Release: <?php echo $movie['release']; ?></p>
             <p class="rating">
               <?php
-              for ($i = 0; $i < floor($movie['rating']); $i++) {
-                echo '<i class="fas fa-star"></i>';
-              }
-              if ($movie['rating'] - floor($movie['rating']) > 0) {
-                echo '<i class="fas fa-star-half-alt"></i>';
-              }
+                for ($i = 0; $i < floor($movie['rating']); $i++) {
+                  echo '<i class="fas fa-star"></i>';
+                }
+                if ($movie['rating'] - floor($movie['rating']) > 0) {
+                  echo '<i class="fas fa-star-half-alt"></i>';
+                }
               ?>
             </p>
             <a class="btn" href="#">LEES MEER & TICKETS</a>
           </div>
         </div>
-        <?php
-      }
+      <?php
+        }
       ?>
     </div>
   </div>
 </body>
 </html>
+
+<?php include "footer.php";?>

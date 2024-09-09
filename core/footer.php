@@ -1,6 +1,6 @@
 <footer class="footer">
         <div class="logo-section">
-            <img alt="AnnexBios logo" src="/assets/img/logo_wit.png" width="150" height="50">
+            <img alt="AnnexBios logo" src="./assets/img/logo_wit.png" width="150" height="50">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,</p>
             <button>LEES MEER</button>
         </div>

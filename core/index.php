@@ -1,19 +1,27 @@
-<?php include "header.php";?>
+<?php include "header.php"; ?>
 
 
 
 <div class="main">
-
-<div class="header-image">
-        <img alt="Header image" src="/assets/img/header_afbeelding.jpg" width="100%">
+    <div class="header-image">
+        <div class="background-image"></div>
+        <div class="black-background"></div>
     </div>
-    
+   
+
     <style>
+        .header-image {
+            position: relative;
+            background-size: cover;
+            height: 300px;
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: sans-serif;
             background-color: #f0f0f0;
+            background: url('./assets/img/header_afbeelding.jpg');
         }
 
         .container {
@@ -25,7 +33,26 @@
             gap: 20px;
         }
 
-        
+    
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./assets/img/header_afbeelding.jpg');
+            background-size: cover;
+        }
+
+        .black-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: none;
+        }
 
         .header p {
             font-size: 1.2em;
@@ -77,41 +104,107 @@
                 flex-direction: column;
             }
 
-            .info, .map {
+            .info,
+            .map {
                 width: 100%;
             }
         }
     </style>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>WELKOM BIJ ANNEXBIOS 5</h1>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient </p>
-            <button>BEKIJK DE DRAAIENDE FILMS</button>
-        </div>
 
-        <div class="content">
-            <div class="info">
-                <h2>Contact Informatie</h2>
-                <p>Rijksstraatweg 42</p>
-                <p>3223 KA Hellevoetsluis</p>
-                <p>020-12345678</p>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>WELKOM BIJ ANNEXBIOS 5</h1>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient </p>
+                <button>BEKIJK DE DRAAIENDE FILMS</button>
             </div>
 
-            <div class="map">
-                <img src="/assets/img/screenshot 2024-09-04 131211.png" alt="Map" class="image">
+            <div class="content">
+                <div class="map-container">
+                    <div class="map">
+                        <img src="./assets/img/screenshot 2024-09-04 131211.png" alt="Map" class="image">
+                    </div>
+                    <div class="info">
+                        <h2>Contact Informatie</h2>
+                        <p>Rijksstraatweg 42</p>
+                        <p>3223 KA Hellevoetsluis</p>
+                        <p>020-12345678</p>
+                    </div>
+                </div>
+                <div class="gebouw">
+                    <img src="./assets/img/gebouw.png" alt="Cinema" class="image">
+                </div>
             </div>
+
         </div>
 
-        <div class="image">
-            <img src="/assets/img/gebouw.png" alt="Cinema" class="image">
-        </div>
-    </div>
+
+</div>
 </body>
+
 </html>
 
 </div>
 
-<?php include "filmagenda.php";?>
+<body>
+    <div class="container">
+        <div class="agenda-header">
+            <h1>FILM AGENDA</h1>
+            <div>
+                <select>
+                    <option>FILMS</option>
+                </select>
+                <select>
+                    <option>DEZE WEEK</option>
+                </select>
+                <select>
+                    <option>VANDAAG</option>
+                </select>
+                <select>
+                    <option>CATEGORIE</option>
+                </select>
+            </div>
+        </div>
+        <div class="movie-grid">
+            <?php
+            include "moviearray.php";
 
-<?php include "footer.php";?>
+            foreach ($movies as $movie) {
+            ?>
+                <div class="movie-card">
+                    <img alt="<?php echo $movie['title']; ?>" height="300" src="<?php echo $movie['image']; ?>" width="200" />
+                    <div class="details">
+                        <h3><?php echo $movie['title']; ?></h3>
+                        <p>Release: <?php echo $movie['release']; ?></p>
+                        <p class="rating">
+                            <?php
+                            for ($i = 0; $i < floor($movie['rating']); $i++) {
+                                echo '<i class="fas fa-star"></i>';
+                            }
+                            if ($movie['rating'] - floor($movie['rating']) > 0) {
+                                echo '<i class="fas fa-star-half-alt"></i>';
+                            }
+                            ?>
+                        </p>
+                        <a class="btn" href="filmagenda.php">LEES MEER & TICKETS</a>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
+
+    <?php include "footer.php"; ?>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 0) {
+                document.querySelector('.black-background').style.display = 'block';
+                document.querySelector('.background-image').style.display = 'none';
+            } else {
+                document.querySelector('.black-background').style.display = 'none';
+                document.querySelector('.background-image').style.display = 'block';
+            }
+        });
+        </script>
