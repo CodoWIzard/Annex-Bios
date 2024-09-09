@@ -1,12 +1,12 @@
 <?php include "header.php";?>
 
-<div class="header-image">
-        <img alt="Header image" src="/assets/img/header_afbeelding.jpg" width="100%">
-    </div>
+
 
 <div class="main">
 
-
+<div class="header-image">
+        <img alt="Header image" src="/assets/img/header_afbeelding.jpg" width="100%">
+    </div>
     
     <style>
         body {
@@ -36,6 +36,7 @@
             display: flex;
             gap: 20px;
             justify-content: space-between;
+            flex-direction: row;
         }
 
         .info {
@@ -81,7 +82,6 @@
             }
         }
     </style>
-</head>
 <body>
     <div class="container">
         <div class="header">
@@ -99,7 +99,7 @@
             </div>
 
             <div class="map">
-                <img src="https://www.google.com/maps/d/embed?mid=1f0Z_fV8y_Y4t2J-i9F55d7G0d3rT64&ehbc=2E312F" alt="Map" class="image">
+                <img src="/assets/img/screenshot 2024-09-04 131211.png" alt="Map" class="image">
             </div>
         </div>
 
