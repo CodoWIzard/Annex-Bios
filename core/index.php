@@ -186,7 +186,7 @@
                             }
                             ?>
                         </p>
-                        <a class="btn" href="testpage.php">LEES MEER & TICKETS</a> <!-- hier komt detailpagina link -->
+                        <a class="btn" href="detailpagina.php">LEES MEER & TICKETS</a> <!-- hier komt detailpagina link -->
                     </div>
                 </div>
             <?php

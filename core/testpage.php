@@ -9,7 +9,7 @@
 <body>
     <div class="container2">
         <div class="poster2">
-            <img src="/assets/img/Jurassic-World_-Fallen-Kingdom.jpg" alt="Jurassic World Poster">
+            <img src="./assets/img/Jurassic-World_-Fallen-Kingdom.jpg" alt="Jurassic World Poster">
         </div>
         <div class="info2">
             <h2>Jurassic World: Fallen Kingdom</h2>
@@ -30,19 +30,19 @@
             <div class="actors">
                 <h3>Acteurs:</h3>
                 <div class="actor">
-                    <img src="path_to_actor1.jpg" alt="Bryce Dallas Howard">
+                    <img src="./asstes/img/BryceDallas.jpg" alt="Bryce Dallas Howard">
                     <p>Bryce Dallas Howard</p>
                 </div>
                 <div class="actor">
-                    <img src="path_to_actor2.jpg" alt="Chris Pratt">
+                    <img src="./asstes/img/Chris_Pratt.jpg" alt="Chris Pratt">
                     <p>Chris Pratt</p>
                 </div>
                 <div class="actor">
-                    <img src="path_to_actor3.jpg" alt="Rafe Spall">
+                    <img src="./asstes/img/rafe_spall.jpg" alt="Rafe Spall">
                     <p>Rafe Spall</p>
                 </div>
                 <div class="actor">
-                    <img src="path_to_actor4.jpg" alt="Toby Jones">
+                    <img src="./asstes/img/Tonyn_Jones.jpg" alt="Toby Jones">
                     <p>Toby Jones</p>
                 </div>
             </div>
