@@ -1,4 +1,4 @@
-<?php include "header.php";?>
+<?php include "header.php"; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #007bff;
+      background-color: #4596BA; 
       color: white;
       padding: 10px 20px;
     }
@@ -37,16 +37,20 @@
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      justify-content: center;
+      justify-content: flex-start; /* Align movies to the left */
     }
     .movie-card {
       background-color: white;
       border: 1px solid #ddd;
-      width: 200px;
+      width: calc(16.66% - 20px); /* Adjusted for 6 cards per row */
+      box-sizing: border-box;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px; /* Added margin for spacing between rows */
     }
     .movie-card img {
       width: 100%;
+      height: auto; /* Ensure images maintain aspect ratio */
+      display: block; /* Prevents whitespace issues */
     }
     .movie-card .details {
       padding: 10px;
@@ -65,12 +69,13 @@
     .movie-card .details .btn {
       display: block;
       text-align: center;
-      background-color: #007bff;
+      background-color: #4596BA;
       color: white;
       padding: 10px;
       text-decoration: none;
       margin-top: 10px;
     }
+    
   </style>
 </head>
 <body>
@@ -95,28 +100,34 @@
     <div class="movie-grid">
       <?php
         include "moviearray.php";
+        
+        shuffle($movies);
 
+        $count = 0;
         foreach ($movies as $movie) {
-      ?>
-        <div class="movie-card">
-          <img alt="<?php echo $movie['title']; ?>" height="300" src="<?php echo $movie['image']; ?>" width="200"/>
-          <div class="details">
-            <h3><?php echo $movie['title']; ?></h3>
-            <p>Release: <?php echo $movie['release']; ?></p>
-            <p class="rating">
-              <?php
-                for ($i = 0; $i < floor($movie['rating']); $i++) {
-                  echo '<i class="fas fa-star"></i>';
-                }
-                if ($movie['rating'] - floor($movie['rating']) > 0) {
-                  echo '<i class="fas fa-star-half-alt"></i>';
-                }
-              ?>
-            </p>
-            <a class="btn" href="#">LEES MEER & TICKETS</a>
+          if ($count >= 36) break; 
+
+          ?>
+          <div class="movie-card">
+            <img alt="<?php echo $movie['title']; ?>" src="<?php echo $movie['image']; ?>"/>
+            <div class="details">
+              <h3><?php echo $movie['title']; ?></h3>
+              <p>Release: <?php echo $movie['release']; ?></p>
+              <p class="rating">
+                <?php
+                  for ($i = 0; $i < floor($movie['rating']); $i++) {
+                    echo '<i class="fas fa-star"></i>';
+                  }
+                  if ($movie['rating'] - floor($movie['rating']) > 0) {
+                    echo '<i class="fas fa-star-half-alt"></i>';
+                  }
+                ?>
+              </p>
+              <a class="btn" href="#">LEES MEER & TICKETS</a>
+            </div>
           </div>
-        </div>
-      <?php
+          <?php
+          $count++;
         }
       ?>
     </div>
@@ -124,4 +135,4 @@
 </body>
 </html>
 
-<?php include "footer.php";?>
+<?php include "footer.php"; ?>
