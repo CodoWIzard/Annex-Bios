@@ -35,11 +35,11 @@
 
     
         .background-image {
-            position: absolute;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 50vh; 
+            position: flex;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('./assets/img/header_afbeelding.jpg');
             background-size: cover; 
             background-position: center; 
@@ -114,12 +114,14 @@
     </style>
 
     <body>
-        <div class="container">
-            <div class="header">
+
+    <div class="header">
                 <h1>WELKOM BIJ ANNEXBIOS 5</h1>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient </p>
                 <button>BEKIJK DE DRAAIENDE FILMS</button>
             </div>
+        <div class="container">
+
 
             <div class="content">
                 <div class="map-container">
