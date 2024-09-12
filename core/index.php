@@ -36,12 +36,14 @@
     
         .background-image {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 50vh; 
             background-image: url('./assets/img/header_afbeelding.jpg');
-            background-size: cover;
+            background-size: cover; 
+            background-position: center; 
+            z-index: -1; 
         }
 
         .black-background {
