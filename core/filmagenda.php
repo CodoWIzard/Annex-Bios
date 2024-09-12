@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: url('./assets/img/header_afbeelding.jpg'); 
+      background-color: black; /*url('./assets/img/header_afbeelding.jpg');*/ 
       background-size: cover;
       margin: 0;
       padding: 0;

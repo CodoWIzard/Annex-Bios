@@ -45,7 +45,7 @@
         }
 
         .black-background {
-            position: absolute;
+            position: flex;
             top: 0;
             left: 0;
             width: 100%;
@@ -186,7 +186,7 @@
                             }
                             ?>
                         </p>
-                        <a class="btn" href="filmagenda.php">LEES MEER & TICKETS</a>
+                        <a class="btn" href="detailpagina.php">LEES MEER & TICKETS</a> <!-- hier komt detailpagina link -->
                     </div>
                 </div>
             <?php
@@ -194,7 +194,7 @@
             ?>
         </div>
     </div>
-
+    <a class="btn" href="filmagenda.php">LEES MEER</a>	
     <?php include "footer.php"; ?>
 
     <script>
