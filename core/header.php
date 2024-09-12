@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./assets/css/test.css">
 </head>
 <body>
-    <header class="header">
+    <header class="upper-header">
         <div class="logo">
             <img alt="Logo" src="./assets/img/bioslogo.png" width="100" height="50">
             <div>

@@ -35,7 +35,7 @@
 
     
         .background-image {
-            position: absolute;
+            position: flex;
             top: 0;
             left: 0;
             width: 100%;
@@ -112,12 +112,14 @@
     </style>
 
     <body>
-        <div class="container">
-            <div class="header">
+
+    <div class="header">
                 <h1>WELKOM BIJ ANNEXBIOS 5</h1>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient </p>
                 <button>BEKIJK DE DRAAIENDE FILMS</button>
             </div>
+        <div class="container">
+
 
             <div class="content">
                 <div class="map-container">
