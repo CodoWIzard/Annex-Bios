@@ -138,9 +138,11 @@ body {
 .bottom-bar {
     background-color: black;
     color: white;
-    text-align: center;
     padding: 10px 0;
+    display: flex;
+    justify-content: flex-start; 
 }
+
 
 .bottom-bar a {
     color: white;
