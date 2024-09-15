@@ -8,6 +8,50 @@
         <div class="black-background"></div>
     </div>
    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #800000;
+            font-family: sans-serif;
+        }
+
+        .welcome-container {
+            background-color: #4682B4;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .welcome-text {
+            font-size: 1.2em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .welcome-button {
+            background-color: #fff;
+            color: #4682B4;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+    </style>
+<body>
+    <div class="welcome-container">
+        <h1 class="welcome-title">WELKOM BIJ ANNEXBIOS 5</h1>
+        <p class="welcome-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient</p>
+        <button class="welcome-button">BEKIJK DE DRAAIENDE FILMS</button>
+    </div>
+
+    
 
     <style>
         .header-image {
@@ -41,6 +85,7 @@
             width: 100%;
             height: 100%;
             background-image: url('./assets/img/header_afbeelding.jpg');
+            filter: brightness(50%);
             background-size: cover;
         }
 
@@ -112,31 +157,7 @@
     </style>
 
     <body>
-        <div class="container">
-            <div class="header">
-                <h1>WELKOM BIJ ANNEXBIOS 5</h1>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient </p>
-                <button>BEKIJK DE DRAAIENDE FILMS</button>
-            </div>
 
-            <div class="content">
-                <div class="map-container">
-                    <div class="map">
-                        <img src="./assets/img/screenshot 2024-09-04 131211.png" alt="Map" class="image">
-                    </div>
-                    <div class="info">
-                        <h2>Contact Informatie</h2>
-                        <p>Rijksstraatweg 42</p>
-                        <p>3223 KA Hellevoetsluis</p>
-                        <p>020-12345678</p>
-                    </div>
-                </div>
-                <div class="gebouw">
-                    <img src="./assets/img/gebouw.png" alt="Cinema" class="image">
-                </div>
-            </div>
-
-        </div>
 
 
 </div>
