@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-
+/* Landing page header styles */
 .header {
     display: flex;
     justify-content: space-between;
@@ -12,6 +12,13 @@ body {
     padding: 10px 20px;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
+}
+
+.header-image img {
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    filter: brightness(50%);
 }
 
 .logo {
@@ -47,7 +54,7 @@ body {
     font-size: 14px;
 }
 
-/* Main styles */
+/* Landing page Main styles */
 .main {
     padding: 20px;
     display: flex;
@@ -159,32 +166,25 @@ body {
     background: url('/assets/img/tape.png') no-repeat;
     background-size: cover;
 }
-.blue-bar {
-    background-color: #4596BA;
-    padding: 20px;
-    text-align: center;
-}
-
-
-
-.blue-bar .ticket-section select, .blue-bar .ticket-section button {
-    display: inline-block;
-    margin: 10px;
-}
 
 .footer .logo-section img {
     width: 200px;
     height: auto;
 }
 
-.header-image img {
-    width: 100%;
-    height: auto;
-    background-size: cover;
-    filter: brightness(50%);
+/* Landing page "kies je film" bar styles */
+.blue-bar {
+    background-color: #4596BA;
+    padding: 20px;
+    text-align: center;
 }
 
-/* Responsive design */
+.blue-bar .ticket-section select, .blue-bar .ticket-section button {
+    display: inline-block;
+    margin: 10px;
+}
+
+/* Landing page Responsive design */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
@@ -216,7 +216,7 @@ body {
 }
 
 
-/* film agenda pagina */
+/* film agenda pagina styles */
 .body {
     font-family: Arial, sans-serif;
     background: url('https://placehold.co/1920x1080') no-repeat center center fixed;
@@ -274,6 +274,4 @@ body {
     padding: 10px;
     text-decoration: none;
     margin-top: 10px;
-  }
-
-  
+  }  

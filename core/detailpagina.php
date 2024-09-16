@@ -6,7 +6,7 @@
     }
   })
     .then(response => {
-      // Check if the response is JSON or plain text
+      // Check response is JSON or plain text
       const contentType = response.headers.get("content-type");
       
       if (!response.ok) {
@@ -14,14 +14,13 @@
       }
       
       if (contentType && contentType.includes("application/json")) {
-        return response.json(); // Parse the JSON if it's JSON
+        return response.json(); // ParseJSON if it's JSON
       } else {
-        return response.text(); // Otherwise, treat it as plain text
+        return response.text(); // plain text
       }
     })
     .then(data => {
-      console.log(data); // Output the data (JSON or text)
-      // You can add logic to handle the response accordingly
+      console.log(data);
     })
     .catch(error => {
       console.error('There was a problem with the fetch operation:', error);
