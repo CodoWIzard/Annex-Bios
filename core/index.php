@@ -65,7 +65,7 @@
             padding: 0;
             font-family: sans-serif;
             background-color: #f0f0f0;
-            background: url('./assets/img/header_afbeelding.jpg');
+            background: url('');
         }
 
         .container {
