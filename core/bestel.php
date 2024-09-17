@@ -1,8 +1,4 @@
-<?php include "header.php"; ?>
 
-<?php
-
-?>
 <html>
 <head>
     <title>Tickets Bestellen</title>
