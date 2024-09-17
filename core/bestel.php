@@ -60,6 +60,7 @@
             margin: 20px 0; /* keep the margin for spacing between steps */
             width: 20%; /* adjust the width to fit your needs */
             vertical-align: top; /* to align the steps vertically */
+            width: 100%;
         }
 
         .step h2 {
