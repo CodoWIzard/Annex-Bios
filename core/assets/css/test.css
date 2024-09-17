@@ -186,7 +186,7 @@ body {
     margin: 10px;
 }
 
-/* Landing page Responsive design */
+
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
@@ -218,7 +218,7 @@ body {
 }
 
 
-/* film agenda pagina styles */
+
 .body {
     font-family: Arial, sans-serif;
     background: url('https://placehold.co/1920x1080') no-repeat center center fixed;

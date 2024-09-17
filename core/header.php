@@ -16,7 +16,7 @@
             </div>
         </div>
         <nav class="nav">
-            <a href="#">FILM AGENDA</a>
+            <a href="filmagenda.php">FILM AGENDA</a>
             <a href="#">ALLE VESTIGINGEN</a>
             <a href="#">CONTACT</a>
         </nav>
@@ -26,8 +26,6 @@
             <select>
                 <option value="bios">Kies je film</option>
             </select>
-            <button>Bestel je Tickets</button>
+           <a href="bestel.php"> <button>Bestel je Tickets</button> <a/>
         </div>
     </div>
-</body>
-</html>
