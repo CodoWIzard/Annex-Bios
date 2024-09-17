@@ -1,0 +1,283 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Landing page header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-image img {
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    filter: brightness(50%);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    color: #0078d7;
+    margin: 0;
+}
+
+.logo p {
+    font-size: 12px;
+    color: #0078d7;
+    margin: 0;
+}
+
+
+.header-nav {
+    display: flex;
+    justify-content: left;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+/* Landing page Main styles */
+.main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+.ticket-section {
+    display: flex;
+    gap: 10px;
+}
+
+.ticket-section select, .ticket-section button {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+}
+
+.ticket-section select {
+    background-color: #b3d7f2;
+    color: #000;
+}
+
+.ticket-section button {
+    background-color: #4a9cc9;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #666666;
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+.footer .logo-section, .footer .nav-section, .footer .social-section {
+    flex: 1;
+    text-align: center;
+}
+
+.footer .logo-section img {
+    width: 50px;
+}
+
+.footer .logo-section p {
+    margin: 10px 0;
+}
+
+.footer .logo-section button {
+    background-color: #333333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.footer .nav-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer .nav-section ul li {
+    margin: 5px 0;
+}
+
+.footer .social-section i {
+    font-size: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.footer .film-strip {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    background: url('/assets/img/tape.png') no-repeat;
+    background-size: cover;
+}
+
+.bottom-bar {
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start; 
+}
+
+
+.bottom-bar a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer .film-strip {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    height: 150px;
+    background: url('/assets/img/tape.png') no-repeat;
+    background-size: cover;
+}
+
+.footer .logo-section img {
+    width: 200px;
+    height: auto;
+}
+
+/* Landing page "kies je film" bar styles */
+.blue-bar {
+    background-color: #4596BA;
+    padding: 20px;
+    text-align: center;
+}
+
+.blue-bar .ticket-section select, .blue-bar .ticket-section button {
+    display: inline-block;
+    margin: 10px;
+}
+
+/* Landing page Responsive design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main {
+        padding: 10px;
+    }
+
+    .ticket-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer .logo-section, .footer .nav-section, .footer .social-section {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* film agenda pagina styles */
+.body {
+    font-family: Arial, sans-serif;
+    background: url('https://placehold.co/1920x1080') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    width: 90%;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+  }
+  .header h1 {
+    margin: 0;
+  }
+  .header select {
+    padding: 5px;
+    margin-left: 10px;
+  }
+  .movie-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .movie-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .movie-card img {
+    width: 100%;
+  }
+  .movie-card .details {
+    padding: 10px;
+  }
+  .movie-card .details h3 {
+    margin: 0;
+    font-size: 16px;
+  }
+  .movie-card .details p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  .movie-card .details .rating {
+    color: #f39c12;
+  }
+  .movie-card .details .btn {
+    display: block;
+    text-align: center;
+    background-color: #4596BA;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 10px;
+  }  
