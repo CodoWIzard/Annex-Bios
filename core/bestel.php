@@ -1,11 +1,5 @@
 <?php include "header.php"; ?>
 
-<html>
-
-<head>
-    <title>Tickets Bestellen</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
     <style>
         .bestel-container {
             width: 80%;
@@ -28,13 +22,6 @@
             margin: 0;
             color: #4596BA;
             display: inline-block;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: left;
-            margin: 10px 0;
-            width: 100%;
         }
 
         .nav a {
@@ -351,9 +338,7 @@
             }
         });
     </script>
-</head>
 
-<body>
     <div class="title-bar">
         <h1>TICKETS BESTELLEN</h1>
     </div>
@@ -470,8 +455,5 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
 
 <?php include "footer.php"; ?>

@@ -43,6 +43,7 @@ body {
     margin: 0;
 }
 
+
 .header-nav {
     display: flex;
     justify-content: left;
@@ -62,7 +63,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
+
+
 
 .ticket-section {
     display: flex;
@@ -186,7 +190,7 @@ body {
     margin: 10px;
 }
 
-
+/* Landing page Responsive design */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
@@ -218,7 +222,7 @@ body {
 }
 
 
-
+/* film agenda pagina styles */
 .body {
     font-family: Arial, sans-serif;
     background: url('https://placehold.co/1920x1080') no-repeat center center fixed;

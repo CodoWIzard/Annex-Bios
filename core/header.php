@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnnexBios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
     <link rel="stylesheet" href="./assets/css/test.css">
 </head>
 <body>
@@ -26,6 +27,6 @@
             <select>
                 <option value="bios">Kies je film</option>
             </select>
-           <a href="bestel.php"> <button>Bestel je Tickets</button> <a/>
+           <a href="bestel.php"> <button>Bestel je Tickets</button> </a>
         </div>
     </div>
