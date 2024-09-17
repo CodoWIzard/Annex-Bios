@@ -6,7 +6,7 @@
     }
   })
     .then(response => {
-      // Check response is JSON or plain text
+    
       const contentType = response.headers.get("content-type");
       
       if (!response.ok) {
@@ -14,9 +14,9 @@
       }
       
       if (contentType && contentType.includes("application/json")) {
-        return response.json(); // ParseJSON if it's JSON
+        return response.json();
       } else {
-        return response.text(); // plain text
+        return response.text(); 
       }
     })
     .then(data => {
@@ -28,7 +28,7 @@
   
 </script>
 <?php
-// Define variables
+
 $movieTitle = "Jurassic World: Fallen Kingdom";
 $releaseDate = "7-06-2018";
 $genre = "Action, Adventure, Science Fiction";
@@ -41,7 +41,7 @@ $cast = array(
 );
 $trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
 
-// Start HTML output
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -174,7 +174,7 @@ $trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
                     <h2>
                         Release: <?php echo $releaseDate; ?>
                     </h2>
-                    <p>
+                    <p style="font-size: 27px;">
                         In JURASSIC WORLD: FALLEN KINGDOM, four years have passed since the theme park and luxury resort Jurassic World was destroyed by dinosaurs out of containment. 
                         Isla Nublar is now abandoned by humans while the surviving dinosaurs fend for themselves in the jungles. When the island's dormant volcano begins roaring to life, 
                         Owen (Chris Pratt) and Claire (Bryce Dallas Howard) mount a campaign to rescue the remaining dinosaurs from this extinction-level event. Owen is driven to find Blue, 
@@ -207,7 +207,7 @@ $trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
             </div>
         </div>
         <div class="buy-tickets">
-            KOOP JE TICKETS
+        <a href="bestel.php"> KOOP JE TICKETS</a>  
         </div>
         <div class="trailer">
             <iframe allowfullscreen="" frameborder="0" src="<?php echo $trailerUrl; ?>">

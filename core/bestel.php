@@ -1,17 +1,12 @@
+<?php include "header.php"; ?>
 
 <html>
+
 <head>
     <title>Tickets Bestellen</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
+        .bestel-container {
             width: 80%;
             margin: 0 auto;
             background-color: #fff;
@@ -19,6 +14,7 @@
             display: flex;
             justify-content: space-between;
         }
+
         .title-bar {
             background-color: #fff;
             padding: 10px;
@@ -26,22 +22,26 @@
             border-bottom: 2px solid #000;
             width: 100%;
         }
+
         .title-bar h1 {
             margin: 0;
             color: #4596BA;
             display: inline-block;
         }
+
         .nav {
             display: flex;
             justify-content: left;
             margin: 10px 0;
             width: 100%;
         }
+
         .nav a {
             margin: 0 10px;
             text-decoration: none;
             color: #4596BA;
         }
+
         .nav .nav-box {
             background-color: #fff;
             padding: 5px 10px;
@@ -51,52 +51,71 @@
             cursor: pointer;
             position: relative;
         }
+
         .content {
             width: 100%;
         }
+
         .sidebar {
             width: 25%;
             background-color: #f4f4f4;
             padding: 10px;
             border: 1px solid #ccc;
         }
+
         .sidebar img {
             width: 100%;
         }
+
         .step {
-            margin: 20px 0;
+            display: inline-block; /* instead of display: block; */
+            margin: 20px 0; /* keep the margin for spacing between steps */
+            width: 20%; /* adjust the width to fit your needs */
+            vertical-align: top; /* to align the steps vertically */
         }
+
         .step h2 {
             color: #4596BA;
             border-bottom: 2px solid #4596BA;
             padding-bottom: 5px;
         }
+
         .step table {
             width: 100%;
             border-collapse: collapse;
         }
-        .step table, .step th, .step td {
+
+        .step table,
+        .step th,
+        .step td {
             border: 1px solid #ccc;
         }
-        .step th, .step td {
+
+        .step th,
+        .step td {
             padding: 10px;
             text-align: left;
         }
-        .step input[type="text"], .step input[type="number"] {
+
+        .step input[type="text"],
+        .step input[type="number"] {
             width: 100%;
             padding: 5px;
             margin: 5px 0;
             box-sizing: border-box;
         }
+
         .step select {
             width: 100%;
             padding: 5px;
             margin: 5px 0;
             box-sizing: border-box;
         }
+
         .step .seats {
             text-align: center;
         }
+
         .step .seats div {
             display: inline-block;
             width: 20px;
@@ -107,12 +126,15 @@
             position: relative;
             border-radius: 3px;
         }
+
         .step .seats .selected {
             background-color: #ffcc00;
         }
+
         .step .seats .reserved {
             background-color: #000;
         }
+
         .step .seats .handicapped::after {
             content: "\f29b";
             font-family: "Font Awesome 5 Free";
@@ -127,14 +149,17 @@
             align-items: center;
             justify-content: center;
         }
+
         .step .payment-methods {
             display: flex;
             align-items: center;
         }
+
         .step .payment-methods img {
             width: 50px;
             margin: 5px;
         }
+
         .step .payment-methods button {
             margin-left: 10px;
             padding: 5px 10px;
@@ -143,14 +168,17 @@
             border: none;
             cursor: pointer;
         }
+
         .step .payment-methods label {
             display: flex;
             align-items: center;
         }
+
         .checkout {
             text-align: center;
             margin: 20px 0;
         }
+
         .blue-container {
             background-color: #4596BA;
             color: #fff;
@@ -159,6 +187,7 @@
             margin-top: 20px;
             cursor: pointer;
         }
+
         .screen {
             text-align: center;
             margin-bottom: 10px;
@@ -167,16 +196,19 @@
             width: 50%;
             margin: 0 auto;
         }
+
         .seat-legend {
             display: flex;
             justify-content: center;
             margin-top: 10px;
         }
+
         .seat-legend div {
             display: flex;
             align-items: center;
             margin: 0 10px;
         }
+
         .seat-legend div span {
             display: inline-block;
             width: 20px;
@@ -184,15 +216,19 @@
             margin-right: 5px;
             border-radius: 3px;
         }
+
         .seat-legend .free span {
             background-color: #4596BA;
         }
+
         .seat-legend .occupied span {
             background-color: #000;
         }
+
         .seat-legend .selected span {
             background-color: #ffcc00;
         }
+
         .movie-info {
             width: 100%;
             background-color: #f4f4f4;
@@ -200,32 +236,39 @@
             border: 1px solid #ccc;
             margin-top: 20px;
         }
+
         .movie-info img {
             width: 100%;
         }
+
         .movie-info h3 {
             margin: 10px 0;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
             min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
+
         .dropdown-content a {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
+
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
+
         .nav-box:hover .dropdown-content {
             display: block;
         }
+
         .blue-button {
             background-color: #4596BA;
             color: #fff;
@@ -234,9 +277,10 @@
             cursor: pointer;
             margin-top: 10px;
         }
+
         .border-blue {
             border: 2px solid #4596BA;
-            padding:  25px;
+            padding: 25px;
         }
     </style>
     <script>
@@ -260,13 +304,12 @@
 
             saveButton.addEventListener('click', function() {
                 const selectedSeats = document.querySelectorAll('.seat.selected');
-                const seatArray = Array.from(seats);
                 let validSelection = true;
 
                 selectedSeats.forEach(seat => {
-                    const index = seatArray.indexOf(seat);
-                    if (index > 0 && index < seatArray.length - 1) {
-                        if (!seatArray[index - 1].classList.contains('selected') && !seatArray[index - 1].classList.contains('reserved') && !seatArray[index + 1].classList.contains('selected') && !seatArray[index + 1].classList.contains('reserved')) {
+                    const index = Array.from(seats).indexOf(seat);
+                    if (index > 0 && index < seats.length - 1) {
+                        if (!seats[index - 1].classList.contains('selected') && !seats[index - 1].classList.contains('reserved') && !seats[index + 1].classList.contains('selected') && !seats[index + 1].classList.contains('reserved')) {
                             validSelection = false;
                         }
                     }
@@ -308,6 +351,7 @@
         });
     </script>
 </head>
+
 <body>
     <div class="title-bar">
         <h1>TICKETS BESTELLEN</h1>
@@ -333,7 +377,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="bestel-container">
         <div class="content">
             <div class="main">
                 <div class="step">
@@ -426,8 +470,7 @@
         </div>
     </div>
 </body>
+
 </html>
-
-
 
 <?php include "footer.php"; ?>

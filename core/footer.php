@@ -26,3 +26,5 @@
         <a href="#">Privacy beleid</a> |
         <a href="#">Cookie disclaimer</a>
     </div>
+    </body>
+</html>
