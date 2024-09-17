@@ -3,10 +3,11 @@
 <head>
     <title>Tickets Bestellen</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000;
+            background-color: beige;
             color: #000;
             margin: 0;
             padding: 0;
@@ -19,6 +20,8 @@
             display: flex;
             justify-content: space-between;
         }
+
+        
         .title-bar {
             background-color: #fff;
             padding: 10px;
@@ -31,12 +34,7 @@
             color: #4596BA;
             display: inline-block;
         }
-        .nav {
-            display: flex;
-            justify-content: left;
-            margin: 10px 0;
-            width: 100%;
-        }
+
         .nav a {
             margin: 0 10px;
             text-decoration: none;
@@ -312,7 +310,7 @@
     <div class="title-bar">
         <h1>TICKETS BESTELLEN</h1>
     </div>
-    <div class="nav">
+    <div class="header-nav">
         <div class="nav-box">
             <a href="#">JURASSIC WORLD</a>
         </div>

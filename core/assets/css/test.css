@@ -43,9 +43,11 @@ body {
     margin: 0;
 }
 
-.nav {
+.header-nav {
     display: flex;
-    gap: 20px;
+    justify-content: left;
+    margin: 10px 0;
+    width: 100%;
 }
 
 .nav a {

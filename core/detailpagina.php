@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <script>
-    fetch('https://u231195.gluwebsite.nl/api/v1/movieData', {
+    fetch('https://annexbios.nickvz.nl/api/v1/movieData', {
     headers: {
       'Authorization': 'Bearer 0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7',
     }
