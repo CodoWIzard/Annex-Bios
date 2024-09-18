@@ -24,6 +24,7 @@
     </header>
     <div class="blue-bar">
         <div class="ticket-section">
+        <h2>KOOP JE TICKETS</h2>
             <select>
                 <option value="bios">Kies je film</option>
             </select>
