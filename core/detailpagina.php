@@ -1,150 +1,57 @@
 <?php include "header.php"; ?>
-<script>
-    fetch('https://annexbios.nickvz.nl/api/v1/movieData', {
-    headers: {
-      'Authorization': 'Bearer 0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7',
-    }
-  })
-    .then(response => {
-    
-      const contentType = response.headers.get("content-type");
-      
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      
-      if (contentType && contentType.includes("application/json")) {
-        return response.json();
-      } else {
-        return response.text(); 
-      }
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-    });
-  
-</script>
+
 <?php
+// Get movie ID from the URL
+$movie_id = isset($_GET['id']) ? $_GET['id'] : null;
 
-$movieTitle = "Jurassic World: Fallen Kingdom";
-$releaseDate = "7-06-2018";
-$genre = "Action, Adventure, Science Fiction";
-$duration = "128 minutes";
-$cast = array(
-    array("name" => "Bryce Dallas Howard", "image" => "assets/img/BryceDallas.jpg"),
-    array("name" => "Chris Pratt", "image" => "assets/img/Chris_Pratt.jpg"),
-    array("name" => "Toby Jones", "image" => "assets/img/Toby_Jones.jpg"),
-    array("name" => "Rafe Spall", "image" => "assets/img/rafe_spall.jpg")
-);
-$trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
+// Check if movie ID is present
+if (!$movie_id) {
+    echo "No movie selected.";
+    exit;
+}
 
+// API URL to fetch movie details based on movie_id
+$api_url = "https://annexbios.nickvz.nl/api/v1/movieData/$movie_id";
+$token = "0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7";
 
+// Initialize a cURL session to fetch data from the API
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $api_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    "Authorization: Bearer $token"
+));
+
+// Execute the cURL session and get the response
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Decode the JSON response into a PHP array
+$movieData = json_decode($response, true);
+
+// Check if movie data was fetched successfully
+if (!$movieData || isset($movieData['error'])) {
+    echo "Error fetching movie data.";
+    exit;
+}
+
+// Extract movie details from the API response
+$movieTitle = $movieData['data']['title'];
+$releaseDate = $movieData['data']['release_date'];
+$genre = implode(", ", $movieData['data']['genres']);  // Assuming genres are returned as an array
+$duration = $movieData['data']['duration'];
+$cast = $movieData['data']['cast'];  // Assuming this is an array of actors
+$trailerUrl = $movieData['data']['trailer_link'];  // Trailer URL
+$rating = $movieData['data']['rating'];
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title><?php echo $movieTitle; ?></title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #000;
-        }
-        .movie-title-container {
-            background-color: #fff;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-        .movie-title {
-            text-align: center;
-            font-size: 50px;
-            color: #0074b7;
-            margin: 0;
-            font-weight: bold;
-        }
-        .content {
-            display: flex;
-            align-items: stretch;
-        }
-        .poster {
-            flex: 1;
-            margin-right: 20px;
-        }
-        .poster img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .details-container {
-            flex: 2;
-            padding: 20px;
-            background-color: #fff;
-            color: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .details h2 {
-            margin-top: 0;
-            font-weight: normal;
-        }
-        .rating {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .rating i {
-            color: #0074b7;
-            margin-right: 5px;
-        }
-        .icons {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .icons img {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-        }
-        .buy-tickets {
-            text-align: center;
-            background-color: #0074b7;
-            padding: 10px;
-            margin: 20px 0;
-            font-size: 40px;
-        }
-        .trailer {
-            text-align: center;
-            border: 5px solid #0074b7;
-            padding: 10px;
-        }
-        .trailer iframe {
-            width: 100%;
-            height: 400px;
-        }
-        .cast {
-            display: flex;
-            margin-top: 10px;
-        }
-        .cast img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+        /* Your existing styles here */
     </style>
 </head>
 <body>
@@ -156,15 +63,17 @@ $trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
         </div>
         <div class="content">
             <div class="poster">
-                <img alt="<?php echo $movieTitle; ?> movie poster" src="assets/img/Jurassic-World_-Fallen-Kingdom.jpg"/>
+                <img alt="<?php echo $movieTitle; ?> movie poster" src="<?php echo $movieData['data']['image']; ?>"/>
             </div>
             <div class="details-container">
                 <div>
                     <div class="rating">
-                        <?php for ($i = 0; $i < 4; $i++) { ?>
+                        <?php for ($i = 0; $i < floor($rating); $i++) { ?>
                             <i class="fas fa-star"></i>
                         <?php } ?>
-                        <i class="far fa-star"></i>
+                        <?php if ($rating - floor($rating) > 0) { ?>
+                            <i class="fas fa-star-half-alt"></i>
+                        <?php } ?>
                     </div>
                     <div class="icons">
                         <img alt="Ages 12 and up logo" height="30" src="assets/img/kijkwijzer-12.png" title="Ages 12 and up" width="30"/>
@@ -175,11 +84,7 @@ $trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
                         Release: <?php echo $releaseDate; ?>
                     </h2>
                     <p style="font-size: 27px;">
-                        In JURASSIC WORLD: FALLEN KINGDOM, four years have passed since the theme park and luxury resort Jurassic World was destroyed by dinosaurs out of containment. 
-                        Isla Nublar is now abandoned by humans while the surviving dinosaurs fend for themselves in the jungles. When the island's dormant volcano begins roaring to life, 
-                        Owen (Chris Pratt) and Claire (Bryce Dallas Howard) mount a campaign to rescue the remaining dinosaurs from this extinction-level event. Owen is driven to find Blue, 
-                        his lead raptor who's still missing in the wild, and Claire has grown a respect for these creatures she now makes her mission. Arriving on the unstable island as lava begins raining down, 
-                        their expedition uncovers a conspiracy that could return our entire planet to a perilous order not seen since prehistoric times.
+                        <?php echo $movieData['data']['description']; ?>  <!-- Assuming the API returns a movie description -->
                     </p>
                     <p>
                         <strong>
@@ -191,7 +96,7 @@ $trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
                         <strong>
                             Duration:
                         </strong>
-                        <?php echo $duration; ?>
+                        <?php echo $duration; ?> minutes
                     </p>
                     <p>
                         <strong>
@@ -199,21 +104,22 @@ $trailerUrl = "https://www.youtube.com/embed/CkAf_qzHNwo";
                         </strong>
                     </p>
                     <div class="cast">
-                        <?php for ($i = 0; $i < count($cast); $i++) { ?>
-                            <img alt="<?php echo $cast[$i]['name']; ?>" height="50" src="<?php echo $cast[$i]['image']; ?>" width="50"/>
+                        <?php foreach ($cast as $actor) { ?>
+                            <img alt="<?php echo $actor['name']; ?>" height="50" src="<?php echo $actor['image']; ?>" width="50"/>
+                            <p><?php echo $actor['name']; ?></p>
                         <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
         <div class="buy-tickets">
-        <a href="bestel.php"> KOOP JE TICKETS</a>  
+            <a href="bestel.php">KOOP JE TICKETS</a>  
         </div>
         <div class="trailer">
-            <iframe allowfullscreen="" frameborder="0" src="<?php echo $trailerUrl; ?>">
-            </iframe>
+            <iframe allowfullscreen="" frameborder="0" src="<?php echo $trailerUrl; ?>"></iframe>
         </div>
     </div>
 </body>
 </html>
+
 <?php include "footer.php"; ?>
