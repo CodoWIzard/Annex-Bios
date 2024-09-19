@@ -1,278 +1,302 @@
 <?php include "header.php"; ?>
 
-    <style>
-        .bestel-container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
+<script>
+    const options = {
+        method: 'POST',
+        body: JSON.stringify({
+            movie_id: 83,
+            place_id: 1,
+            name: 'Henk de Boer',
+            email: 'henk.deboer@mail.nl'
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer 87myiOkW34gPWzFYYmxrrOg3j7cEM9CM',
         }
+        
+    };
 
-        .title-bar {
-            background-color: #fff;
-            padding: 10px;
-            text-align: left;
-            border-bottom: 2px solid #000;
-            width: 100%;
-        }
+    fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+</script>
 
-        .title-bar h1 {
-            margin: 0;
-            color: #4596BA;
-            display: inline-block;
-        }
 
-        .nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #4596BA;
-        }
 
-        .nav .nav-box {
-            background-color: #fff;
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-            display: inline-block;
-            margin-right: 10px;
-            cursor: pointer;
-            position: relative;
-        }
+<style>
+    .bestel-container {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
 
-        .content {
-            width: 100%;
-        }
+    .title-bar {
+        background-color: #fff;
+        padding: 10px;
+        text-align: left;
+        border-bottom: 2px solid #000;
+        width: 100%;
+    }
 
-        .sidebar {
-            width: 25%;
-            background-color: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
+    .title-bar h1 {
+        margin: 0;
+        color: #4596BA;
+        display: inline-block;
+    }
 
-        .sidebar img {
-            width: 100%;
-        }
+    .nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #4596BA;
+    }
 
-        .step {
-            display: inline-block; /* instead of display: block; */
-            margin: 20px 0; /* keep the margin for spacing between steps */
-            width: 20%; /* adjust the width to fit your needs */
-            vertical-align: top; /* to align the steps vertically */
-            width: 100%;
-        }
+    .nav .nav-box {
+        background-color: #fff;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        display: inline-block;
+        margin-right: 10px;
+        cursor: pointer;
+        position: relative;
+    }
 
-        .step h2 {
-            color: #4596BA;
-            border-bottom: 2px solid #4596BA;
-            padding-bottom: 5px;
-        }
+    .content {
+        width: 100%;
+    }
 
-        .step table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    .sidebar {
+        width: 25%;
+        background-color: #f4f4f4;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
 
-        .step table,
-        .step th,
-        .step td {
-            border: 1px solid #ccc;
-        }
+    .sidebar img {
+        width: 100%;
+    }
 
-        .step th,
-        .step td {
-            padding: 10px;
-            text-align: left;
-        }
+    .step {
+        display: inline-block;
+        margin: 20px 0;
+        width: 20%;
+        vertical-align: top;
+        width: 100%;
+    }
 
-        .step input[type="text"],
-        .step input[type="number"] {
-            width: 100%;
-            padding: 5px;
-            margin: 5px 0;
-            box-sizing: border-box;
-        }
+    .step h2 {
+        color: #4596BA;
+        border-bottom: 2px solid #4596BA;
+        padding-bottom: 5px;
+    }
 
-        .step select {
-            width: 100%;
-            padding: 5px;
-            margin: 5px 0;
-            box-sizing: border-box;
-        }
+    .step table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-        .step .seats {
-            text-align: center;
-        }
+    .step table,
+    .step th,
+    .step td {
+        border: 1px solid #ccc;
+    }
 
-        .step .seats div {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background-color: #4596BA;
-            margin: 2px;
-            cursor: pointer;
-            position: relative;
-            border-radius: 3px;
-        }
+    .step th,
+    .step td {
+        padding: 10px;
+        text-align: left;
+    }
 
-        .step .seats .selected {
-            background-color: #ffcc00;
-        }
+    .step input[type="text"],
+    .step input[type="number"] {
+        width: 100%;
+        padding: 5px;
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
 
-        .step .seats .reserved {
-            background-color: #000;
-        }
+    .step select {
+        width: 100%;
+        padding: 5px;
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
 
-        .step .seats .handicapped::after {
-            content: "\f29b";
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            color: #fff;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .step .seats {
+        text-align: center;
+    }
 
-        .step .payment-methods {
-            display: flex;
-            align-items: center;
-        }
+    .step .seats div {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #4596BA;
+        margin: 2px;
+        cursor: pointer;
+        position: relative;
+        border-radius: 3px;
+    }
 
-        .step .payment-methods img {
-            width: 50px;
-            margin: 5px;
-        }
+    .step .seats .selected {
+        background-color: #ffcc00;
+    }
 
-        .step .payment-methods button {
-            margin-left: 10px;
-            padding: 5px 10px;
-            background-color: #4596BA;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
+    .step .seats .reserved {
+        background-color: #000;
+    }
 
-        .step .payment-methods label {
-            display: flex;
-            align-items: center;
-        }
+    .step .seats .handicapped::after {
+        content: "\f29b";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .checkout {
-            text-align: center;
-            margin: 20px 0;
-        }
+    .step .payment-methods {
+        display: flex;
+        align-items: center;
+    }
 
-        .blue-container {
-            background-color: #4596BA;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
+    .step .payment-methods img {
+        width: 50px;
+        margin: 5px;
+    }
 
-        .screen {
-            text-align: center;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #4596BA;
-            width: 50%;
-            margin: 0 auto;
-        }
+    .step .payment-methods button {
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: #4596BA;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
 
-        .seat-legend {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
+    .step .payment-methods label {
+        display: flex;
+        align-items: center;
+    }
 
-        .seat-legend div {
-            display: flex;
-            align-items: center;
-            margin: 0 10px;
-        }
+    .checkout {
+        text-align: center;
+        margin: 20px 0;
+    }
 
-        .seat-legend div span {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-            border-radius: 3px;
-        }
+    .blue-container {
+        background-color: #4596BA;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
 
-        .seat-legend .free span {
-            background-color: #4596BA;
-        }
+    .screen {
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #4596BA;
+        width: 50%;
+        margin: 0 auto;
+    }
 
-        .seat-legend .occupied span {
-            background-color: #000;
-        }
+    .seat-legend {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
 
-        .seat-legend .selected span {
-            background-color: #ffcc00;
-        }
+    .seat-legend div {
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+    }
 
-        .movie-info {
-            width: 100%;
-            background-color: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-top: 20px;
-        }
+    .seat-legend div span {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        border-radius: 3px;
+    }
 
-        .movie-info img {
-            width: 100%;
-        }
+    .seat-legend .free span {
+        background-color: #4596BA;
+    }
 
-        .movie-info h3 {
-            margin: 10px 0;
-        }
+    .seat-legend .occupied span {
+        background-color: #000;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
+    .seat-legend .selected span {
+        background-color: #ffcc00;
+    }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
+    .movie-info {
+        width: 100%;
+        background-color: #f4f4f4;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+    }
 
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
+    .movie-info img {
+        width: 100%;
+    }
 
-        .nav-box:hover .dropdown-content {
-            display: block;
-        }
+    .movie-info h3 {
+        margin: 10px 0;
+    }
 
-        .blue-button {
-            background-color: #4596BA;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
 
-        .border-blue {
-            border: 2px solid #4596BA;
-            padding: 25px;
-        }
-    </style>
-    <script>
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .nav-box:hover .dropdown-content {
+        display: block;
+    }
+
+    .blue-button {
+        background-color: #4596BA;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .border-blue {
+        border: 2px solid #4596BA;
+        padding: 25px;
+    }
+</style>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         const seats = document.querySelectorAll('.seat');
         const saveButton = document.createElement('button');
@@ -454,7 +478,7 @@
             <div class="step">
                 <h2>STAP 3: CONTROLEER JE BESTELLING</h2>
                 <div class="border-blue">
-                <img src="assets/img/Jurassic-World_-Fallen-Kingdom.jpg" alt="Movie poster of Jurassic World: Fallen Kingdom" style="float: left; margin-right: 10px;" width="100" height="150">
+                    <img src="assets/img/Jurassic-World_-Fallen-Kingdom.jpg" alt="Movie poster of Jurassic World: Fallen Kingdom" style="float: left; margin-right: 10px;" width="100" height="150">
                     <h3>JURASSIC WORLD: FALLEN KINGDOM</h3>
                     <p>Genre: Actie, Avontuur, Sci-Fi</p>
                     <p>Speelduur: 2u 8m</p>

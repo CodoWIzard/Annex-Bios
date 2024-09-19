@@ -5,49 +5,49 @@ $movies = array(
           'image' => './assets/img/Jurassic-World_-Fallen-Kingdom.jpg',
           'release' => '06-06-2018',
           'rating' => 4.5,
-          'id'=>001
+          
         ),
         array(
           'title' => 'Deadpool 2',
           'image' => './assets/img/deadpool.jpg',
           'release' => '17-05-2018',
           'rating' => 4.5,
-          'id'=>002
+          
         ),
         array(
           'title' => 'Solo: A Star Wars Story',
           'image' => './assets/img/solo.jpeg',
           'release' => '23-05-2018',
           'rating' => 4.5,
-          'id'=>003
+          
         ),
         array(
           'title' => 'Pieter Konijn',
           'image' => './assets/img/pieter konijn.jpg',
           'release' => '28-03-2018',
           'rating' => 4.5,
-          'id'=>004,
+          
         ),
         array(
             'title' => 'Jurassic World: Fallen Kingdom',
             'image' => './assets/img/Jurassic-World_-Fallen-Kingdom.jpg',
             'release' => '06-06-2018',
             'rating' => 4.5,
-            'id'=>005,
+            
           ),
           array(
             'title' => 'Deadpool 2',
             'image' => './assets/img/deadpool.jpg',
             'release' => '17-05-2018',
             'rating' => 4.5,
-            'id'=>006,
+            
           ),
           array(
             'title' => 'Solo: A Star Wars Story',
             'image' => './assets/img/solo.jpeg',
             'release' => '23-05-2018',
             'rating' => 4.5,
-            'id'=>007,
+            
           ),
           array(
             'title' => 'Pieter Konijn',
