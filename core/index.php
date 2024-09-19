@@ -1,5 +1,69 @@
 <?php include "header.php"; ?>
-<div class="container">
+
+<script>
+fetch('https://annexbios.nickvz.nl/api/v1/movieData', {
+    headers: {
+        'Authorization': 'Bearer 0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7', // Replace 'token' with your actual token
+    }
+})
+.then(response => {
+    const contentType = response.headers.get("content-type");
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+
+    if (contentType && contentType.includes("application/json")) {
+        return response.json();
+    } else {
+        return response.text();
+    }
+})
+.then(data => {
+    // Access array in data field
+    const movies = data.data;
+
+    // Dynamics
+    const movieGrid = document.getElementById('movie-grid');
+
+    movies.forEach(movie => {
+    const movieCard = document.createElement('div');
+    movieCard.classList.add('movie-card');
+
+    movieCard.innerHTML = `
+        <img alt="${movie.title}" height="300" src="${movie.image}" width="200" />
+        <div class="details">
+            <h3>${movie.title}</h3>
+            <p>Release: ${movie.release_date}</p>
+            <p class="rating">
+                ${generateStars(movie.rating)}
+            </p>
+            <a class="btn" href="detailpagina.php?id=${movie.api_id}">LEES MEER & TICKETS</a>
+        </div>
+    `;
+
+    movieGrid.appendChild(movieCard);
+});
+
+})
+.catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+});
+
+// Helper function to generate star ratings
+function generateStars(rating) {
+    let starsHtml = '';
+    for (let i = 0; i < Math.floor(rating); i++) {
+        starsHtml += '<i class="fas fa-star"></i>';
+    }
+    if (rating - Math.floor(rating) > 0) {
+        starsHtml += '<i class="fas fa-star-half-alt"></i>';
+    }
+    return starsHtml;
+}
+</script>
+
+
 <div class="main">
     <div class="header-image">
         <div class="background-image"></div>
@@ -69,7 +133,6 @@
             flex-direction: column;
             gap: 20px;
         }
-
     
         .background-image {
             top: 0;
@@ -176,37 +239,28 @@
                 </select>
             </div>
         </div>
-        <div class="movie-grid">
-            <?php
-            include "moviearray.php";
 
-            foreach ($movies as $movie) {
-            ?>
-                <div class="movie-card">
-                    <img alt="<?php echo $movie['title']; ?>" height="300" src="<?php echo $movie['image']; ?>" width="200" />
-                    <div class="details">
-                        <h3><?php echo $movie['title']; ?></h3>
-                        <p>Release: <?php echo $movie['release']; ?></p>
-                        <p class="rating">
-                            <?php
-                            for ($i = 0; $i < floor($movie['rating']); $i++) {
-                                echo '<i class="fas fa-star"></i>';
-                            }
-                            if ($movie['rating'] - floor($movie['rating']) > 0) {
-                                echo '<i class="fas fa-star-half-alt"></i>';
-                            }
-                            ?>
-                        </p>
-                        <a class="btn" href="detailpagina.php">LEES MEER & TICKETS</a> <!-- hier komt detailpagina link -->
-                    </div>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
+        <div class="movie-grid" id="movie-grid">
+    <!-- Movie cards will be injected here by JavaScript -->
+</div>
+
+
+
     </div>
+
+
     <a class="btn" href="filmagenda.php">LEES MEER</a>	
     <?php include "footer.php"; ?>
+
+
+
+
+
+
+
+
+
+
 
     <script>
         window.addEventListener('scroll', function() {
