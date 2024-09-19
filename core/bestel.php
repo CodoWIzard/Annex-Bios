@@ -273,188 +273,222 @@
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const seats = document.querySelectorAll('.seat');
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Save Seats';
-            saveButton.classList.add('blue-button');
-            document.querySelector('.step').appendChild(saveButton);
+    document.addEventListener('DOMContentLoaded', function() {
+        const seats = document.querySelectorAll('.seat');
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save Seats';
+        saveButton.classList.add('blue-button');
+        document.querySelector('.step').appendChild(saveButton);
 
-            seats.forEach(seat => {
-                seat.addEventListener('click', function() {
-                    if (this.classList.contains('reserved')) return;
-                    if (this.classList.contains('selected')) {
-                        this.classList.remove('selected');
-                    } else {
-                        this.classList.add('selected');
-                    }
-                });
+        let selectedSeats = [];
+        let ticketCount = 0;
+
+        // Get ticket count from input fields
+        const ticketInputs = document.querySelectorAll('input[type="number"]');
+        ticketInputs.forEach(input => {
+            input.addEventListener('input', updateTicketCount);
+        });
+
+        function updateTicketCount() {
+            ticketCount = 0;
+            ticketInputs.forEach(input => {
+                ticketCount += parseInt(input.value);
             });
+            updateSeatSelection();
+        }
 
-            saveButton.addEventListener('click', function() {
-                const selectedSeats = document.querySelectorAll('.seat.selected');
-                let validSelection = true;
+        // Update seat selection based on ticket count
+        function updateSeatSelection() {
+            seats.forEach(seat => {
+                seat.classList.remove('selected');
+                seat.classList.remove('reserved');
+            });
+            selectedSeats = [];
+        }
 
-                selectedSeats.forEach(seat => {
-                    const index = Array.from(seats).indexOf(seat);
-                    if (index > 0 && index < seats.length - 1) {
-                        if (!seats[index - 1].classList.contains('selected') && !seats[index - 1].classList.contains('reserved') && !seats[index + 1].classList.contains('selected') && !seats[index + 1].classList.contains('reserved')) {
-                            validSelection = false;
-                        }
+        // Seat selection logic
+        seats.forEach(seat => {
+            seat.addEventListener('click', function() {
+                if (this.classList.contains('reserved')) return;
+                if (selectedSeats.length < ticketCount) {
+                    this.classList.add('selected');
+                    selectedSeats.push(this);
+                    if (selectedSeats.length === ticketCount) {
+                        validateSeatSelection();
                     }
-                });
-
-                if (!validSelection) {
-                    alert('You cannot leave a seat in between free.');
                 } else {
-                    alert('Seats saved successfully.');
-                    updateSelectedSeats();
+                    alert('You have already selected the maximum number of seats.');
                 }
             });
+        });
 
-            function updateSelectedSeats() {
-                const selectedSeats = document.querySelectorAll('.seat.selected');
-                const seatNumbers = Array.from(selectedSeats).map(seat => Array.from(seats).indexOf(seat) + 1);
-                document.getElementById('seat-numbers').textContent = seatNumbers.join(', ');
+        // Validate seat selection to ensure contiguous seats
+        function validateSeatSelection() {
+            const seatIndices = selectedSeats.map(seat => Array.from(seats).indexOf(seat));
+            seatIndices.sort((a, b) => a - b);
+            for (let i = 0; i < seatIndices.length - 1; i++) {
+                if (seatIndices[i + 1] - seatIndices[i] > 1) {
+                    alert('Please select contiguous seats.');
+                    selectedSeats.forEach(seat => seat.classList.remove('selected'));
+                    selectedSeats = [];
+                    return;
+                }
             }
+            // If validation passes, mark seats as reserved
+            selectedSeats.forEach(seat => seat.classList.add('reserved'));
+        }
 
-            const ticketInputs = document.querySelectorAll('input[type="number"]');
-            const totalPriceElement = document.createElement('p');
-            totalPriceElement.textContent = 'Totale Prijs: €0.00';
-            document.querySelector('.step').appendChild(totalPriceElement);
-
-            ticketInputs.forEach(input => {
-                input.addEventListener('input', calculateTotal);
-            });
-
-            function calculateTotal() {
-                let total = 0;
-                ticketInputs.forEach(input => {
-                    const price = parseFloat(input.closest('tr').querySelector('td:nth-child(2)').textContent.replace('€', ''));
-                    const quantity = parseInt(input.value);
-                    total += price * quantity;
-                });
-                totalPriceElement.textContent = `Totale Prijs: €${total.toFixed(2)}`;
-                document.getElementById('total-price').textContent = `€${total.toFixed(2)}`;
+        saveButton.addEventListener('click', function() {
+            if (selectedSeats.length === ticketCount) {
+                alert('Seats saved successfully.');
+                updateSelectedSeats();
+            } else {
+                alert('Please select the correct number of seats.');
             }
         });
-    </script>
 
-    <div class="title-bar">
-        <h1>TICKETS BESTELLEN</h1>
+        function updateSelectedSeats() {
+            const seatNumbers = selectedSeats.map(seat => Array.from(seats).indexOf(seat) + 1);
+            document.getElementById('seat-numbers').textContent = seatNumbers.join(', ');
+        }
+
+        // Existing code for calculating total price
+        const totalPriceElement = document.createElement('p');
+        totalPriceElement.textContent = 'Totale Prijs: €0.00';
+        document.querySelector('.step').appendChild(totalPriceElement);
+
+        ticketInputs.forEach(input => {
+            input.addEventListener('input', calculateTotal);
+        });
+
+        function calculateTotal() {
+            let total = 0;
+            ticketInputs.forEach(input => {
+                const price = parseFloat(input.closest('tr').querySelector('td:nth-child(2)').textContent.replace('€', ''));
+                const quantity = parseInt(input.value);
+                total += price * quantity;
+            });
+            totalPriceElement.textContent = `Totale Prijs: €${total.toFixed(2)}`;
+            document.getElementById('total-price').textContent = `€${total.toFixed(2)}`;
+        }
+    });
+</script>
+
+<div class="title-bar">
+    <h1>TICKETS BESTELLEN</h1>
+</div>
+<div class="header-nav">
+    <div class="nav-box">
+        <a href="#">JURASSIC WORLD</a>
     </div>
-    <div class="header-nav">
-        <div class="nav-box">
-            <a href="#">JURASSIC WORLD</a>
-        </div>
-        <div class="nav-box">
-            <a href="#">DATUM</a>
-            <div class="dropdown-content">
-                <a href="#">12 September 2024</a>
-                <a href="#">13 September 2024</a>
-                <a href="#">14 September 2024</a>
-            </div>
-        </div>
-        <div class="nav-box">
-            <a href="#">TIJD STIP</a>
-            <div class="dropdown-content">
-                <a href="#">19:30</a>
-                <a href="#">20:30</a>
-                <a href="#">21:30</a>
-            </div>
-        </div>
-    </div>
-    <div class="bestel-container">
-        <div class="content">
-            <div class="main">
-                <div class="step">
-                    <h2>STAP 1: KIES JE TICKET</h2>
-                    <table>
-                        <tr>
-                            <th>TYPE</th>
-                            <th>PRIJS</th>
-                            <th>AANTAL</th>
-                        </tr>
-                        <tr>
-                            <td>Volwassen</td>
-                            <td>€10.00</td>
-                            <td><input type="number" value="0"></td>
-                        </tr>
-                        <tr>
-                            <td>Kinderen</td>
-                            <td>€7.50</td>
-                            <td><input type="number" value="0"></td>
-                        </tr>
-                        <tr>
-                            <td>65+</td>
-                            <td>€8.00</td>
-                            <td><input type="number" value="0"></td>
-                        </tr>
-                    </table>
-                    <input type="text" placeholder="VOUCHER CODE">
-                    <button class="blue-button">TOEPASSEN</button>
-                </div>
-                <div class="step">
-                    <h2>STAP 2: KIES JE STOEL</h2>
-                    <div class="screen">FILM DOEK</div>
-                    <div class="seats">
-                        <?php for ($i = 0; $i < 120; $i++): ?>
-                            <?php if ($i % 10 === 0): ?>
-                                <br>
-                            <?php endif; ?>
-                            <?php if ($i % 15 === 0): ?>
-                                <div class="seat reserved"></div>
-                            <?php elseif ($i % 20 === 0): ?>
-                                <div class="seat handicapped"></div>
-                            <?php else: ?>
-                                <div class="seat"></div>
-                            <?php endif; ?>
-                        <?php endfor; ?>
-                    </div>
-                    <div class="seat-legend">
-                        <div class="free"><span></span>Vrij</div>
-                        <div class="occupied"><span></span>Bezet</div>
-                        <div class="selected"><span></span>Jouw Selectie</div>
-                    </div>
-                </div>
-                <div class="step">
-                    <h2>STAP 3: CONTROLEER JE BESTELLING</h2>
-                    <div class="border-blue">
-                        <img src="assets/img/Jurassic-World_-Fallen-Kingdom.jpg" alt="Movie poster of Jurassic World: Fallen Kingdom" style="float: left; margin-right: 10px;" width="100" height="150">
-                        <h3>JURASSIC WORLD: FALLEN KINGDOM</h3>
-                        <p>Genre: Actie, Avontuur, Sci-Fi</p>
-                        <p>Speelduur: 2u 8m</p>
-                        <p>Leeftijd: 12+</p>
-                        <p>Prijs: <span id="total-price">€10.00</span></p>
-                        <p>Seats: <span id="seat-numbers">None</span></p>
-                        <p>Auditorium: 1</p>
-                    </div>
-                </div>
-                <div class="step border-blue">
-                    <h2>STAP 4: VUL JE GEGEVENS IN</h2>
-                    <input type="text" placeholder="Voornaam">
-                    <input type="text" placeholder="Achternaam">
-                    <input type="text" placeholder="E-mailadres">
-                </div>
-                <div class="step">
-                    <h2>STAP 5: KIES JE BETAALWIJZE</h2>
-                    <div class="payment-methods">
-                        <label>
-                            <input type="radio" name="payment" value="visa">
-                            <img src="assets/img/visa.png" alt="Visa logo" width="50" height="50">
-                        </label>
-                        <label>
-                            <input type="radio" name="payment" value="mastercard">
-                            <img src="assets/img/mastercard.png" alt="Mastercard logo" width="50" height="50">
-                        </label>
-                        <label>
-                            <input type="radio" name="payment" value="ideal">
-                            <img src="assets/img/ideal.png" alt="Ideal logo" width="50" height="50">
-                        </label>
-                    </div>
-                </div>
-            </div>
+    <div class="nav-box">
+        <a href="#">DATUM</a>
+        <div class="dropdown-content">
+            <a href="#">12 September 2024</a>
+            <a href="#">13 September 2024</a>
+            <a href="#">14 September 2024</a>
         </div>
     </div>
+    <div class="nav-box">
+        <a href="#">TIJD STIP</a>
+        <div class="dropdown-content">
+            <a href="#">19:30</a>
+            <a href="#">20:30</a>
+            <a href="#">21:30</a>
+        </div>
+    </div>
+</div>
+<div class="bestel-container">
+    <div class="content">
+        <div class="main">
+            <div class="step">
+                <h2>STAP 1: KIES JE TICKET</h2>
+                <table>
+                    <tr>
+                        <th>TYPE</th>
+                        <th>PRIJS</th>
+                        <th>AANTAL</th>
+                    </tr>
+                    <tr>
+                        <td>Volwassen</td>
+                        <td>€10.00</td>
+                        <td><input type="number" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Kinderen</td>
+                        <td>€7.50</td>
+                        <td><input type="number" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>65+</td>
+                        <td>€8.00</td>
+                        <td><input type="number" value="0"></td>
+                    </tr>
+                </table>
+                <input type="text" placeholder="VOUCHER CODE">
+                <button class="blue-button">TOEPASSEN</button>
+            </div>
+            <div class="step">
+                <h2>STAP 2: KIES JE STOEL</h2>
+                <div class="screen">FILM DOEK</div>
+                <div class="seats">
+                    <?php for ($i = 0; $i < 120; $i++): ?>
+                        <?php if ($i % 10 === 0): ?>
+                            <br>
+                        <?php endif; ?>
+                        <?php if ($i % 15 === 0): ?>
+                            <div class="seat reserved"></div>
+                        <?php elseif ($i % 20 === 0): ?>
+                            <div class="seat handicapped"></div>
+                        <?php else: ?>
+                            <div class="seat"></div>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </div>
+                <div class="seat-legend">
+                    <div class="free"><span></span>Vrij</div>
+                    <div class="occupied"><span></span>Bezet</div>
+                    <div class="selected"><span></span>Jouw Selectie</div>
+                </div>
+            </div>
+            <div class="step">
+                <h2>STAP 3: CONTROLEER JE BESTELLING</h2>
+                <div class="border-blue">
+                <img src="assets/img/Jurassic-World_-Fallen-Kingdom.jpg" alt="Movie poster of Jurassic World: Fallen Kingdom" style="float: left; margin-right: 10px;" width="100" height="150">
+                    <h3>JURASSIC WORLD: FALLEN KINGDOM</h3>
+                    <p>Genre: Actie, Avontuur, Sci-Fi</p>
+                    <p>Speelduur: 2u 8m</p>
+                    <p>Leeftijd: 12+</p>
+                    <p>Prijs: <span id="total-price">€10.00</span></p>
+                    <p>Seats: <span id="seat-numbers">None</span></p>
+                    <p>Auditorium: 1</p>
+                </div>
+            </div>
+            <div class="step border-blue">
+                <h2>STAP 4: VUL JE GEGEVENS IN</h2>
+                <input type="text" placeholder="Voornaam">
+                <input type="text" placeholder="Achternaam">
+                <input type="text" placeholder="E-mailadres">
+            </div>
+            <div class="step">
+                <h2>STAP 5: KIES JE BETAALWIJZE</h2>
+                <div class="payment-methods">
+                    <label>
+                        <input type="radio" name="payment" value="visa">
+                        <img src="assets/img/visa.png" alt="Visa logo" width="50" height="50">
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="mastercard">
+                        <img src="assets/img/mastercard.png" alt="Mastercard logo" width="50" height="50">
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="ideal">
+                        <img src="assets/img/ideal.png" alt="Ideal logo" width="50" height="50">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include "footer.php"; ?>
