@@ -20,31 +20,31 @@ fetch('https://annexbios.nickvz.nl/api/v1/movieData', {
     }
 })
 .then(data => {
-    // Access the array in the `data` field
+    // Access array in data field
     const movies = data.data;
 
-    // Dynamically create movie cards
+    // Dynamics
     const movieGrid = document.getElementById('movie-grid');
 
     movies.forEach(movie => {
-        const movieCard = document.createElement('div');
-        movieCard.classList.add('movie-card');
+    const movieCard = document.createElement('div');
+    movieCard.classList.add('movie-card');
 
-        // Assuming the movie has a title and image fields
-        movieCard.innerHTML = `
-            <img alt="${movie.title}" height="300" src="path/to/image" width="200" />
-            <div class="details">
-                <h3>${movie.title}</h3>
-                <p>Release: ${movie.release}</p>
-                <p class="rating">
-                    ${generateStars(movie.rating)}
-                </p>
-                <a class="btn" href="detailpagina.php?id=${movie.api_id}">LEES MEER & TICKETS</a>
-            </div>
-        `;
+    movieCard.innerHTML = `
+        <img alt="${movie.title}" height="300" src="${movie.image}" width="200" />
+        <div class="details">
+            <h3>${movie.title}</h3>
+            <p>Release: ${movie.release_date}</p>
+            <p class="rating">
+                ${generateStars(movie.rating)}
+            </p>
+            <a class="btn" href="detailpagina.php?id=${movie.api_id}">LEES MEER & TICKETS</a>
+        </div>
+    `;
 
-        movieGrid.appendChild(movieCard);
-    });
+    movieGrid.appendChild(movieCard);
+});
+
 })
 .catch(error => {
     console.error('There was a problem with the fetch operation:', error);
@@ -61,8 +61,8 @@ function generateStars(rating) {
     }
     return starsHtml;
 }
-
 </script>
+
 
 <div class="main">
     <div class="header-image">
