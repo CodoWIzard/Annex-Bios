@@ -1,7 +1,5 @@
 <?php include "header.php"; ?>
-
-
-
+<div class="container">
 <div class="main">
     <div class="header-image">
         <div class="background-image"></div>
@@ -9,17 +7,13 @@
     </div>
    
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #800000;
-            font-family: sans-serif;
-        }
 
         .welcome-container {
+            height: 100%;
+            width: 80vw;
             background-color: #4682B4;
             color: #fff;
-            padding: 20px;
+            padding: 10px 20px;
             text-align: center;
         }
 
@@ -43,14 +37,13 @@
             font-size: 1.2em;
             cursor: pointer;
         }
-    </style>
+</style>
 <body>
     <div class="welcome-container">
         <h1 class="welcome-title">WELKOM BIJ ANNEXBIOS 5</h1>
         <p class="welcome-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient</p>
         <button class="welcome-button">BEKIJK DE DRAAIENDE FILMS</button>
     </div>
-
     
 
     <style>
@@ -79,13 +72,10 @@
 
     
         .background-image {
-            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('./assets/img/header_afbeelding.jpg');
-            filter: brightness(50%);
             background-size: cover;
         }
 
@@ -95,7 +85,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: black;
+        
             display: none;
         }
 
@@ -229,3 +219,4 @@
             }
         });
         </script>
+</div>

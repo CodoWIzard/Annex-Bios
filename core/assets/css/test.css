@@ -3,92 +3,64 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
-
-/* Landing page header styles */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
+    padding: 10px 10px 10px 15px; /* Adjusted padding to move it slightly to the left */
+    background-color: white;
+    border-bottom: 1px solid #ccc;
 }
-
-.header-image img {
-    width: 100%;
-    height: auto;
-    background-size: cover;
-    filter: brightness(50%);
-}
-
 .logo {
     display: flex;
     align-items: center;
 }
-
 .logo img {
     height: 40px;
     margin-right: 10px;
 }
-
 .logo h1 {
+    margin: 0;
     font-size: 24px;
-    color: #0078d7;
-    margin: 0;
+    color: #4a90e2;
 }
-
-.logo p {
-    font-size: 12px;
-    color: #0078d7;
-    margin: 0;
+.logo h1 span {
+    font-size: 18px;
 }
-
-
-.header-nav {
+.nav {
     display: flex;
-    justify-content: left;
-    margin: 10px 0;
-    width: 100%;
+    gap: 20px;
 }
-
 .nav a {
     text-decoration: none;
-    color: #000;
-    font-size: 14px;
+    color: black;
+    font-size: 16px;
 }
-
-/* Landing page Main styles */
-.main {
+.ticket-section {
+    background-color: #4a90e2;
     padding: 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
-
-
-
-.ticket-section {
-    display: flex;
-    gap: 10px;
+.ticket-section h2 {
+    color: white;
+    margin: 0;
+    margin-right: 20px;
+    font-size: 20px;
 }
-
 .ticket-section select, .ticket-section button {
     padding: 10px;
-    font-size: 14px;
+    font-size: 16px;
     border: none;
-    border-radius: 5px;
+    margin-right: 10px;
 }
-
 .ticket-section select {
-    background-color: #b3d7f2;
-    color: #000;
+    background-color: #7ab8d9;
+    color: white;
 }
-
 .ticket-section button {
-    background-color: #4a9cc9;
-    color: #fff;
-    font-weight: bold;
+    background-color: white;
+    color: #4a90e2;
     cursor: pointer;
 }
 
@@ -178,17 +150,6 @@ body {
     height: auto;
 }
 
-/* Landing page "kies je film" bar styles */
-.blue-bar {
-    background-color: #4596BA;
-    padding: 20px;
-    text-align: center;
-}
-
-.blue-bar .ticket-section select, .blue-bar .ticket-section button {
-    display: inline-block;
-    margin: 10px;
-}
 
 /* Landing page Responsive design */
 @media (max-width: 768px) {
