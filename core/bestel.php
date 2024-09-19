@@ -1,35 +1,5 @@
 <?php include "header.php"; ?>
 
-<script>
-    const options = {
-  method: 'POST',
-  body: JSON.stringify({
-    movie_id: 83,
-    place_id: 1,
-    name: 'Henk de Boer',
-    email: 'henk.deboer@mail.nl'
-  }),
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': '0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7',
-  },
-  mode: 'no-cors' 
-}; 
-
-fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => console.log(data))
-  .catch(err => console.error('Fetch error:', err));
-
-</script>
-
-
-
 <style>
     .bestel-container {
         width: 80%;
@@ -38,6 +8,14 @@ fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
         padding: 20px;
         display: flex;
         justify-content: space-between;
+    }
+
+    .body {
+        background-color: #f4f4f4;
+    }
+
+    .title-bar {
+        background-color: #f4f4f4;
     }
 
     .title-bar {
@@ -115,7 +93,7 @@ fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
         padding: 10px;
         text-align: left;
     }
-    
+
     .step input[type="text"],
     .step input[type="number"] {
         width: 100%;
@@ -301,7 +279,56 @@ fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
         border: 2px solid #4596BA;
         padding: 25px;
     }
+
+    .header-nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f4f4f4;
+        border: 1px solid #ccc;
+    }
+
+    .header-nav-container span {
+        margin: 0 10px;
+    }
+
+    /* Add some basic styling to make the dropdowns visible */
+    .header-nav-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .nav-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #datum,
+    #tijd-stip {
+        position: relative;
+    }
+
+    #datum-select,
+    #tijd-stip-select {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    #datum:hover #datum-select,
+    #tijd-stip:hover #tijd-stip-select {
+        display: block;
+    }
 </style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const seats = document.querySelectorAll('.seat');
@@ -401,31 +428,45 @@ fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
             totalPriceElement.textContent = `Totale Prijs: €${total.toFixed(2)}`;
             document.getElementById('total-price').textContent = `€${total.toFixed(2)}`;
         }
+        document.getElementById('datum-select').addEventListener('change', function() {
+            document.getElementById('selected-datum').textContent = this.value;
+            document.getElementById('selected-datum-stap3').textContent = this.value;
+        });
+
+        document.getElementById('tijd-stip-select').addEventListener('change', function() {
+            document.getElementById('selected-tijd-stip').textContent = this.value;
+            document.getElementById('selected-tijd-stip-stap3').textContent = this.value;
+        });
+
     });
 </script>
 
-<div class="title-bar">
-    <h1>TICKETS BESTELLEN</h1>
-</div>
-<div class="header-nav">
+<div class="title-bar"></div>
+<h1>TICKETS BESTELLEN</h1>
+<div class="header-nav-container">
     <div class="nav-box">
-        <a href="#">JURASSIC WORLD</a>
-    </div>
-    <div class="nav-box">
-        <a href="#">DATUM</a>
-        <div class="dropdown-content">
-            <a href="#">12 September 2024</a>
-            <a href="#">13 September 2024</a>
-            <a href="#">14 September 2024</a>
-        </div>
-    </div>
-    <div class="nav-box">
-        <a href="#">TIJD STIP</a>
-        <div class="dropdown-content">
-            <a href="#">19:30</a>
-            <a href="#">20:30</a>
-            <a href="#">21:30</a>
-        </div>
+        <span>JURASSIC WORLD</span>
+        <span id="datum">Datum:
+            <select id="datum-select">
+                <option value="2023-01-01">1 January 2023</option>
+                <option value="2023-01-02">2 January 2023</option>
+                <option value="2023-01-03">3 January 2023</option>
+                <option value="2023-01-04">4 January 2023</option>
+                <option value="2023-01-05">5 January 2023</option>
+            </select>
+            <span id="selected-datum"></span>
+        </span>
+        <span id="tijd-stip">Tijdstip:
+            <select id="tijd-stip-select">
+                <option value="10:00">10:00</option>
+                <option value="12:00">12:00</option>
+                <option value="14:00">14:00</option>
+                <option value="16:00">16:00</option>
+                <option value="18:00">18:00</option>
+                <option value="20:00">20:00</option>
+            </select>
+            <span id="selected-tijd-stip"></span>
+        </span>
     </div>
 </div>
 <div class="bestel-container">
@@ -489,6 +530,8 @@ fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
                     <p>Genre: Actie, Avontuur, Sci-Fi</p>
                     <p>Speelduur: 2u 8m</p>
                     <p>Leeftijd: 12+</p>
+                    <p>Datum: <span id="selected-datum-stap3"></span></p>
+                    <p>Tijdstip: <span id="selected-tijd-stip-stap3"></span></p>
                     <p>Prijs: <span id="total-price">€10.00</span></p>
                     <p>Seats: <span id="seat-numbers">None</span></p>
                     <p>Auditorium: 1</p>
@@ -505,7 +548,7 @@ fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
                 <div class="payment-methods">
                     <label>
                         <input type="radio" name="payment" value="visa">
-                        <img src="assets/img/visa.png" alt="Visa logo" width="50" height="50">
+                        <img src="assets/img/visa.png" alt="Visa logo" width="50" height="50 ">
                     </label>
                     <label>
                         <input type="radio" name="payment" value="mastercard">
@@ -521,4 +564,5 @@ fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
     </div>
 </div>
 
-<?php include "footer.php"; ?>
+
+</div> <?php include "footer.php"; ?>
