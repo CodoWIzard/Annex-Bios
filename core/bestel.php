@@ -11,15 +11,21 @@
   }),
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer 0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7',
+    'Authorization': '0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7',
   },
   mode: 'no-cors' 
 }; 
 
 fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => console.log(data))
+  .catch(err => console.error('Fetch error:', err));
+
 </script>
 
 
