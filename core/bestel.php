@@ -2,24 +2,24 @@
 
 <script>
     const options = {
-        method: 'POST',
-        body: JSON.stringify({
-            movie_id: 83,
-            place_id: 1,
-            name: 'Henk de Boer',
-            email: 'henk.deboer@mail.nl'
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer 87myiOkW34gPWzFYYmxrrOg3j7cEM9CM',
-        }
-        
-    };
+  method: 'POST',
+  body: JSON.stringify({
+    movie_id: 83,
+    place_id: 1,
+    name: 'Henk de Boer',
+    email: 'henk.deboer@mail.nl'
+  }),
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer 0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7',
+  },
+  mode: 'no-cors' 
+}; 
 
-    fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
 </script>
 
 
@@ -109,7 +109,7 @@
         padding: 10px;
         text-align: left;
     }
-
+    
     .step input[type="text"],
     .step input[type="number"] {
         width: 100%;
