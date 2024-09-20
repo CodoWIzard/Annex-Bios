@@ -1,59 +1,176 @@
 <?php include "header.php"; ?>
-
 <?php
-// Get movie ID from the URL
-$movie_id = isset($_GET['id']) ? $_GET['id'] : null;
+$movieId = $_GET['id'];
 
-// Check if movie ID is present
-if (!$movie_id) {
-    echo "No movie selected.";
-    exit;
-}
+$apiUrl = 'https://annexbios.nickvz.nl/api/v1/movieData';
+$apiKey = '0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7';
 
-// API URL to fetch movie details based on movie_id
-$api_url = "https://annexbios.nickvz.nl/api/v1/movieData/$movie_id";
-$token = "0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7";
-
-// Initialize a cURL session to fetch data from the API
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $api_url);
+$ch = curl_init($apiUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    "Authorization: Bearer $token"
+    'Authorization: Bearer ' . $apiKey
 ));
 
-// Execute the cURL session and get the response
 $response = curl_exec($ch);
 curl_close($ch);
 
-// Decode the JSON response into a PHP array
-$movieData = json_decode($response, true);
+$data = json_decode($response, true);
 
-// Check if movie data was fetched successfully
-if (!$movieData || isset($movieData['error'])) {
-    echo "Error fetching movie data.";
-    exit;
+$movies = $data['data'];
+
+$movie = null;
+foreach ($movies as $m) {
+    if ($m['api_id'] == $movieId) {
+        $movie = $m;
+        break;
+    }
 }
 
-// Extract movie details from the API response
-$movieTitle = $movieData['data']['title'];
-$releaseDate = $movieData['data']['release_date'];
-$genre = implode(", ", $movieData['data']['genres']);  // Assuming genres are returned as an array
-$duration = $movieData['data']['duration'];
-$cast = $movieData['data']['cast'];  // Assuming this is an array of actors
-$trailerUrl = $movieData['data']['trailer_link'];  // Trailer URL
-$rating = $movieData['data']['rating'];
+if ($movie) {
+    $movieTitle = $movie['title'];
+    $releaseDate = $movie['release_date'];
+    $genre = [];
+    $length = $movie['length'];
+    $trailer_link = $movie['trailer_link'];
+    $rating = $movie['rating'];
+    $image = $movie['image'];
+    $description = $movie['description'];
+} else {
+    // Handle the case where the movie is not found
+    $movieTitle = 'Movie not found';
+    $releaseDate = '';
+    $genre = '';
+    $duration = '';
+    $cast = array();
+    $rating = 0;
+    $image = '';
+    $description = '';
+}
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title><?php echo $movieTitle; ?></title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <style>
-        /* Your existing styles here */
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #000;
+        }
+
+        .movie-title-container {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .movie-title {
+            text-align: center;
+            font-size: 50px;
+            color: #0074b7;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .content {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .poster {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .details-container {
+            flex: 2;
+            padding: 20px;
+            background-color: #fff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .details h2 {
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .rating i {
+            color: #0074b7;
+            margin-right: 5px;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .icons img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .buy-tickets {
+            text-align: center;
+            background-color: #0074b7;
+            padding: 10px;
+            margin: 20px 0;
+            font-size: 40px;
+        }
+
+        .trailer {
+            text-align: center;
+            border: 5px solid #0074b7;
+            padding: 10px;
+        }
+
+        .trailer iframe {
+            width: 100%;
+            height: 400px;
+        }
+
+        .cast {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .cast img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="movie-title-container">
@@ -63,7 +180,7 @@ $rating = $movieData['data']['rating'];
         </div>
         <div class="content">
             <div class="poster">
-                <img alt="<?php echo $movieTitle; ?> movie poster" src="<?php echo $movieData['data']['image']; ?>"/>
+                <img alt="<?php echo $movieTitle; ?> movie poster" src="<?php echo $image; ?>" />
             </div>
             <div class="details-container">
                 <div>
@@ -75,51 +192,35 @@ $rating = $movieData['data']['rating'];
                             <i class="fas fa-star-half-alt"></i>
                         <?php } ?>
                     </div>
-                    <div class="icons">
-                        <img alt="Ages 12 and up logo" height="30" src="assets/img/kijkwijzer-12.png" title="Ages 12 and up" width="30"/>
-                        <img alt="Fear logo" height="30" src="assets/img/kijkwijzer-eng.png" title="Fear" width="30"/>
-                        <img alt="Violence logo" height="30" src="assets/img/kijkwijzer-geweld.png" title="Violence" width="30"/>
-                    </div>
                     <h2>
                         Release: <?php echo $releaseDate; ?>
                     </h2>
-                    <p style="font-size: 27px;">
-                        <?php echo $movieData['data']['description']; ?>  <!-- Assuming the API returns a movie description -->
+                    <p>
+                        <?php echo $description; ?>
+                    </p>
+
+                    <p>
+                        Duration: <?php echo $length; ?>
                     </p>
                     <p>
-                        <strong>
-                            Genre:
-                        </strong>
-                        <?php echo $genre; ?>
-                    </p>
-                    <p>
-                        <strong>
-                            Duration:
-                        </strong>
-                        <?php echo $duration; ?> minutes
-                    </p>
-                    <p>
-                        <strong>
-                            Cast:
-                        </strong>
+                        Cast:
                     </p>
                     <div class="cast">
-                        <?php foreach ($cast as $actor) { ?>
-                            <img alt="<?php echo $actor['name']; ?>" height="50" src="<?php echo $actor['image']; ?>" width="50"/>
-                            <p><?php echo $actor['name']; ?></p>
-                        <?php } ?>
+
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="buy-tickets">
-            <a href="bestel.php">KOOP JE TICKETS</a>  
+            <a href="bestel.php?id=<?php echo $movieId; ?>">KOOP JE TICKETS</a>
         </div>
         <div class="trailer">
-            <iframe allowfullscreen="" frameborder="0" src="<?php echo $trailerUrl; ?>"></iframe>
+        <iframe crossorigin="anonymous" allowfullscreen="" frameborder="0" src="<?php echo $trailer_link; ?>"></iframe>
         </div>
     </div>
 </body>
-</html>
 
+
+</html>
 <?php include "footer.php"; ?>
