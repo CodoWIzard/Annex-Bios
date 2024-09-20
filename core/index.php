@@ -74,7 +74,7 @@ function generateStars(rating) {
 
         .welcome-container {
             height: 100%;
-            width: 80vw;
+            width: 100%;
             background-color: #4682B4;
             color: #fff;
             padding: 10px 20px;
