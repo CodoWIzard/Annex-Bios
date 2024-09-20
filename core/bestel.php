@@ -1,4 +1,39 @@
 <?php include "header.php"; ?>
+<script>
+    const seats = document.querySelectorAll('.seat');
+    const seatNumbers = [];
+    const selectedSeats = [];
+
+    seats.forEach((seat, index) => {
+        seatNumbers.push(index + 1);
+        seat.addEventListener('click', () => {
+            if (selectedSeats.includes(seat)) {
+                selectedSeats.splice(selectedSeats.indexOf(seat), 1);
+            } else {
+                selectedSeats.push(seat);
+            }
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    movie_id: 83,
+                    place_id: 1,
+                    name: 'Henk de Boer',
+                    email: 'henk.deboer@mail.nl',
+                    seat_ids: selectedSeats.map(seat => seatNumbers[Array.from(seats).indexOf(seat)])
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 0be8d9266c188d1e2e2550f41b7ba5f965c8daa4046c3a62f996e5547ac834b7',
+                },
+                mode: 'cors'
+            };
+            fetch('https://u231195.gluwebsite.nl/api/v1/reservePlace', options)
+                .then(response => response.json())
+                .then(response => console.log(response))
+                .catch(err => console.error(err));
+        });
+    });
+</script>
 
 <style>
     .bestel-container {
