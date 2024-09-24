@@ -206,8 +206,6 @@ if ($movie) {
                         Cast:
                     </p>
                     <div class="cast">
-
-
                     </div>
                 </div>
             </div>

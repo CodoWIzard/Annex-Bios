@@ -328,7 +328,6 @@
         margin: 0 10px;
     }
 
-    /* Add some basic styling to make the dropdowns visible */
     .header-nav-container {
         display: flex;
         flex-direction: row;
@@ -375,7 +374,7 @@
         let selectedSeats = [];
         let ticketCount = 0;
 
-        // Get ticket count from input fields
+        // Get ticket count
         const ticketInputs = document.querySelectorAll('input[type="number"]');
         ticketInputs.forEach(input => {
             input.addEventListener('input', updateTicketCount);
@@ -389,7 +388,7 @@
             updateSeatSelection();
         }
 
-        // Update seat selection based on ticket count
+        // Update seat selection
         function updateSeatSelection() {
             seats.forEach(seat => {
                 seat.classList.remove('selected');
@@ -414,7 +413,7 @@
             });
         });
 
-        // Validate seat selection to ensure contiguous seats
+        // Validate seat selection
         function validateSeatSelection() {
             const seatIndices = selectedSeats.map(seat => Array.from(seats).indexOf(seat));
             seatIndices.sort((a, b) => a - b);
@@ -426,7 +425,7 @@
                     return;
                 }
             }
-            // If validation passes, mark seats as reserved
+            // If validation passes, mark reserved
             selectedSeats.forEach(seat => seat.classList.add('reserved'));
         }
 

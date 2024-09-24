@@ -121,8 +121,8 @@ function generateStars(rating) {
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            background-color: #f0f0f0;
-            background: url('');
+            background-color: black;
+            background: url('header_afbeelding.jpg') no-repeat center center fixed;
         }
 
         .container {
@@ -241,7 +241,6 @@ function generateStars(rating) {
         </div>
 
         <div class="movie-grid" id="movie-grid">
-    <!-- Movie cards will be injected here by JavaScript -->
 </div>
 
 

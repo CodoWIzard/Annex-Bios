@@ -5,7 +5,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: black; /*url('./assets/img/header_afbeelding.jpg');*/ 
+      background-color: black;
       background-size: cover;
       margin: 0;
       padding: 0;
@@ -35,20 +35,20 @@
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      justify-content: flex-start; /* Align movies to the left */
+      justify-content: flex-start;
     }
     .movie-card {
       background-color: white;
       border: 1px solid #ddd;
-      width: calc(16.66% - 20px); /* Adjusted for 6 cards per row */
+      width: calc(16.66% - 20px);
       box-sizing: border-box;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px; /* Added margin for spacing between rows */
+      margin-bottom: 20px;
     }
     .movie-card img {
       width: 100%;
-      height: auto; /* Ensure images maintain aspect ratio */
-      display: block; /* Prevents whitespace issues */
+      height: auto;
+      display: block;
     }
     .movie-card .details {
       padding: 10px;
@@ -119,7 +119,7 @@ fetch('https://annexbios.nickvz.nl/api/v1/movieData', {
     }
 })
 .then(data => {
-    // Access array in data field
+    // Access array
     const movies = data.data;
 
     // Dynamics
